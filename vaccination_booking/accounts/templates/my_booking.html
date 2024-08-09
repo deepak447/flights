@@ -1,0 +1,57 @@
+{% extends "base.html"%}
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="center">My Bookings</h2>
+    {% if bookings %}
+    <table class="table table-bordered">
+        <a href="/search_center/">Search center</a>
+        <p><a href="/my_bookings/">My Booking</a></p>
+        <thead>
+            <tr>
+                <th>Booking ID</th> 
+                <th>Center Name</th>
+                <th>Vaccine Name</th>
+                <th>Address</th>
+                <th>Working Hours Start</th>
+                <th>Working Hours End</th>
+                <th>Booking Date</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.center_name }}</td>  
+                <td>{{ booking.vaccine_name }}</td>  
+                <td>{{ booking.address }}</td>  
+                <td>{{ booking.working_hours_start }}</td>  
+                <td>{{ booking.working_hours_end }}</td>  
+                <td>{{ booking.booking_date }}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>You have no bookings yet.</p>
+    <div class="center">
+        <p>Click to see Center list <a href="/list_of_centre/">Click here</a></p>
+        <p>Click to Search Center <a href="/search_center/">Search Center</a></p>
+    </div>
+    {% endif %}
+
+    {% endblock %}
+
+</body>
+</html>

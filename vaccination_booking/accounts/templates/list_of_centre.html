@@ -1,0 +1,51 @@
+{% extends "base.html"%}
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 class="center">List Of Centre</h2>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <table class="table table-bordered"> 
+            <a href="/search_center/">Search center</a>
+            <p><a href="/my_bookings/">My Booking</a></p>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>City</th>
+                    <th>Center Name</th>
+                    <th>vaccine name</th>
+                    <th>address</th>
+                    <th>working hours start</th>
+                    <th>working hours end</th>
+                    <th>available slots</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for center in centers %}
+                <tr>
+                    <td>{{ center.id}}</td>
+                    <td>{{ center.city}}</td>
+                    <td>{{ center.center_name }}</td>
+                    <td>{{ center.vaccine_name }}</td>
+                    <td>{{ center.address }}</td>
+                    <td>{{ center.working_hours_start }}</td>
+                    <td>{{ center.working_hours_end }}</td>
+                    <td>{{ center.available_slots }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</body>
+</html>
+{% endblock  %}

@@ -1,0 +1,33 @@
+{% extends "base.html"%}
+{% block start %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Details</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Booking Confirmation</h1> 
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form class="card p-3 " action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                    <p> Check your Booked Flight - :<a href="/my_bookings/"> Booked Flight </a></p>
+                    <p> Click to Search Flight<a href="/search_flights/"> Search Flight </a></p>
+                </form>         
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock  %}

@@ -1,0 +1,72 @@
+{% extends "base.html"%}
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <center>
+        <form class="col-6 mx-auto card p-3" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Search Flight</button>
+            <p> Check your Booked Flight - :<a href="/my_bookings/"> Booked Flight </a></p>
+            <p> Click to see flights list <a href="/list_of_flights/">Click here</a></p>
+        </form>         
+    </center>
+    <br>
+    {% if flights %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th>Flight Number</th>
+                    <th>Departure City</th>
+                    <th>Arrival City</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Airline</th>
+                    <th>Price</th>
+                    <th>Seats Available</th>
+                    <th>Book flight</th>
+                </tr>
+            </thead>
+            <tbody >
+                {% for flight in flights %}
+                <tr>
+                    <th scope="row">{{ forloop.counter}}</th>
+                    <td>{{ flight.flight_number }}</td>
+                    <td>{{ flight.departure_city }}</td>
+                    <td>{{ flight.arrival_city }}</td>
+                    <td>{{ flight.departure_time }}</td>
+                    <td>{{ flight.arrival_time }}</td> 
+                    <td>{{ flight.airline }}</td> 
+                    <td>{{ flight.price }}</td> 
+                    <td>{{ flight.seats_available }}</td>
+                    <td>
+                        <a href="/bookings/{{flight.id}}" class="btn btn-success">click to book</a>
+                    </td>
+    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+     {% endif %}
+    
+    
+</body>
+</html>
+
+
+
+{% endblock  %}

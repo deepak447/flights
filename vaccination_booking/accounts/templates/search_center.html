@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Vaccination Centers</title>
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <center>
+        <form class="col-6 mx-auto card p-3" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Search Center</button>
+            <p> Click to see Center list <a href="/list_of_centre/">Click here</a></p>
+        </form>         
+    </center>
+    <br>
+    
+    {% if centers %}  
+        <table class="table table-bordered"> 
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>City</th>
+                    <th>Center Name</th>
+                    <th>vaccine name</th>
+                    <th>address</th>
+                    <th>working hours start</th>
+                    <th>working hours end</th>
+                    <th>available slots</th>
+                    <th>Book slot</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for center in centers %}
+                <tr>
+                    <td>{{ center.id}}</td>
+                    <td>{{ center.city}}</td>
+                    <td>{{ center.center_name }}</td>
+                    <td>{{ center.vaccine_name }}</td>
+                    <td>{{ center.address }}</td>
+                    <td>{{ center.working_hours_start }}</td>
+                    <td>{{ center.working_hours_end }}</td>
+                    <td>{{ center.available_slots }}</td>
+                    <td>
+                        <a href="/book_slot/{{center.id}}" class="btn btn-success">click to book</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}   
+</body>
+</html>
+{% endblock %}

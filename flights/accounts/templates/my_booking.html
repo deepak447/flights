@@ -1,0 +1,61 @@
+{% extends "base.html"%}
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .center   
+     {
+          text-align: center;
+        }
+      </style>
+</head>
+<body>
+    <h2 class="center">My Bookings</h2>
+    {% if bookings %}
+        <table class="table">
+            <p> Click to see flights list <a href="/list_of_flights/">Click here</a></p>
+            <a href="/search_flights/">Search Flight</a>
+            <br>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Flight Number</th>
+                    <th>Departure</th>
+                    <th>Arrival</th>
+                    <th>Passengers</th>
+                    <th>Booking Date</th>
+                    <th>Airline</th>
+                    <!-- <th>Price</th> --> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.id }}</td>
+                        <td>{{ booking.flight.flight_number }}</td>
+                        <td>{{ booking.flight.departure_city }}</td>
+                        <td>{{ booking.flight.arrival_city }}</td>
+                        <td>{{ booking.num_passengers }}</td>
+                        <td>{{ booking.booking_date }}</td> 
+                        <td>{{ flight.airline }}</td> 
+                        <td>{{ flight.price }}</td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    {% else %}
+        <p>You have no bookings yet.</p>
+        <div class="center">
+            <p> Click to see flights list <a href="/list_of_flights/">Click here</a></p>
+            <p> Click to Search Flight <a href="/search_flights/">Search Flight</a></p>
+        </div>
+    {% endif %}
+
+    {% endblock  %}
+    
+</body>
